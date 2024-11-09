@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{dd/MM/yyyy HH:mm:ss:SSS} %C %M %5p - %m%n</Property>
+        <Property name="APP_LOG_ROOT">E:/Projects/UOB/Applications/VisualIVR/Logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="CustomWidget"
+                     fileName="${APP_LOG_ROOT}/EDPLog.log"
+                     filePattern="${APP_LOG_ROOT}/CustomWidget-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+        <Logger name="com.tetherfi" level="debug" additivity="true" >
+            <AppenderRef ref="CustomWidget" />
+        </Logger>
+    </Loggers>
+
+</Configuration>
